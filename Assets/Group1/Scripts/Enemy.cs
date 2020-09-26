@@ -1,25 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(CircleCollider2D))]
-
-public class Enemy : MonoBehaviour
+public class Enemy : ObjectEnemy
 {
   [SerializeField] private float _speed = 2;
-  [SerializeField] private float _circleColliderRadius = 0.2f;
   [SerializeField] private int _nextWaypointRadius = 4;
 
-  public event UnityAction<Enemy> Dying;
-
   private Vector3 _nextWaypoint;
-  private CircleCollider2D _collider2D;
+
+  public event UnityAction<Enemy> Dying;
 
   private void Start()
   {
     SetNextWaypoint();
-    _collider2D = GetComponent<CircleCollider2D>();
-    _collider2D.radius = _circleColliderRadius;
-    _collider2D.isTrigger = true;
   }
 
   private void Update()
@@ -35,7 +28,7 @@ public class Enemy : MonoBehaviour
     _nextWaypoint = Random.insideUnitCircle * _nextWaypointRadius;
   }
 
-  private void OnTriggerEnter2D(Collider2D collision)
+  protected override void OnTriggerEnter2D(Collider2D collision)
   {
     if (collision.GetComponent<Player>() != null)
     {

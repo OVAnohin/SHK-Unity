@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -14,9 +12,9 @@ public class Player : MonoBehaviour
   private Rigidbody2D _rigidbody2D;
   private PlayerMover _playerMover;
 
-  public void BoostSpeed(BoostSpeed speedObject)
+  public void GetSpeedBoost(SpeedBoost element)
   {
-    _playerMover.TemporarySpeedBoost(speedObject);
+    _playerMover.TemporarySpeedBoost(element);
   }
 
   private void Start()

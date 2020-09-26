@@ -6,8 +6,7 @@ public class PlayerMover : MonoBehaviour
   [SerializeField] private float _speed = 4;
   [SerializeField] private bool _isTimeSpeedUp = false;
   [SerializeField] private float _fastSpeedTime = 2;
-  [SerializeField] private float _speedDown = 2;
-  [SerializeField] private float _speedUp = 2;
+  [SerializeField] private float _deltaSpeed = 2;
 
   private void Start()
   {
@@ -23,15 +22,17 @@ public class PlayerMover : MonoBehaviour
     transform.Translate(horizontal, vertical, 0);
   }
 
-  public void TemporarySpeedBoost(BoostSpeed elem)
+  public void TemporarySpeedBoost(SpeedBoost element)
   {
-    StartCoroutine(SetPlayerMoveFaster());
+    if (element != null)
+      StartCoroutine(SetPlayerMoveFaster());
+
   }
 
   private IEnumerator SetPlayerMoveFaster()
   {
     float elapsedTime = _fastSpeedTime;
-    _speed *= _speedUp;
+    _speed *= _deltaSpeed;
 
     while (elapsedTime > 0)
     {
@@ -39,6 +40,6 @@ public class PlayerMover : MonoBehaviour
       yield return null;
     }
 
-    _speed /= _speedDown;
+    _speed /= _deltaSpeed;
   }
 }
