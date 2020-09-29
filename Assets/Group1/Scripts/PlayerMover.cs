@@ -11,7 +11,7 @@ public class PlayerMover : MonoBehaviour
   private void Start()
   {
     if (_isTimeSpeedUp)
-      StartCoroutine(SetPlayerMoveFaster());
+      StartCoroutine(MoveFaster());
   }
 
   private void Update()
@@ -22,14 +22,14 @@ public class PlayerMover : MonoBehaviour
     transform.Translate(horizontal, vertical, 0);
   }
 
-  public void TemporarySpeedBoost(SpeedBoost element)
+  public void InvokeSpeedBoost(SpeedBoost element)
   {
     if (element != null)
-      StartCoroutine(SetPlayerMoveFaster());
+      StartCoroutine(MoveFaster());
 
   }
 
-  private IEnumerator SetPlayerMoveFaster()
+  private IEnumerator MoveFaster()
   {
     float elapsedTime = _fastSpeedTime;
     _speed *= _deltaSpeed;

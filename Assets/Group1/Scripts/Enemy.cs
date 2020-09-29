@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-public class Enemy : ObjectEnemy
+public class Enemy : Character
 {
   [SerializeField] private float _speed = 2;
   [SerializeField] private int _nextWaypointRadius = 4;
@@ -12,7 +12,7 @@ public class Enemy : ObjectEnemy
 
   private void Start()
   {
-    SetNextWaypoint();
+    GenerateWaypoint();
   }
 
   private void Update()
@@ -20,10 +20,10 @@ public class Enemy : ObjectEnemy
     transform.position = Vector3.MoveTowards(transform.position, _nextWaypoint, _speed * Time.deltaTime);
 
     if (transform.position == _nextWaypoint)
-      SetNextWaypoint();
+      GenerateWaypoint();
   }
 
-  private void SetNextWaypoint()
+  private void GenerateWaypoint()
   {
     _nextWaypoint = Random.insideUnitCircle * _nextWaypointRadius;
   }

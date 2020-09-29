@@ -2,10 +2,8 @@
 using UnityEngine.Events;
 
 [RequireComponent(typeof(CircleCollider2D))]
-
-public abstract class ObjectEnemy : MonoBehaviour
+public abstract class Character : MonoBehaviour
 {
-  
   [SerializeField] private float _circleColliderRadius = 0.2f;
 
   private CircleCollider2D _circleCollider2D;
