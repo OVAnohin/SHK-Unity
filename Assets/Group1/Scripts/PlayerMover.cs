@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMover : MonoBehaviour
@@ -7,28 +8,25 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float _fastSpeedTime = 2;
     [SerializeField] private float _deltaSpeed = 2;
 
-
     private void Update()
     {
-        float vertical = GetAxisInput("Vertical");
-        float horizontal = GetAxisInput("Horizontal");
-
-        transform.Translate(horizontal, vertical, 0);
+        Move(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
 
-    private float GetAxisInput(string axis)
+    private void Move(float horizontal, float vertical)
     {
-        return Input.GetAxis(axis) * _speed * Time.deltaTime;
+        transform.Translate(horizontal * _speed * Time.deltaTime, vertical * _speed * Time.deltaTime, 0);
     }
 
-    public void InvokeSpeedBoost(SpeedBoost element)
+    public void BoostSpeed(SpeedBoost booster)
     {
-        if (element != null)
-            StartCoroutine(MoveFaster());
+        if (booster == null)
+            throw new Exception("Booster is null");
 
+        StartCoroutine(ActivateSpeedBoost());
     }
 
-    private IEnumerator MoveFaster()
+    private IEnumerator ActivateSpeedBoost()
     {
         _speed *= _deltaSpeed;
 

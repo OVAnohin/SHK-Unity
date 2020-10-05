@@ -7,7 +7,7 @@ public class SpeedBoost : Character
     {
         if (collision.GetComponent<Player>() != null)
         {
-            collision.GetComponent<Player>().TakeSpeedBoost(this);
+            collision.GetComponent<Player>().BoostSpeed(this);
         }
     }
 }

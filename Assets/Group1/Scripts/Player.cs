@@ -5,13 +5,14 @@ public class Player : MonoBehaviour
 {
     private PlayerMover _playerMover;
 
-    public void TakeSpeedBoost(SpeedBoost element)
-    {
-        _playerMover.InvokeSpeedBoost(element);
-    }
-
     private void Start()
     {
         _playerMover = GetComponent<PlayerMover>();
     }
+
+    public void BoostSpeed(SpeedBoost booster)
+    {
+        _playerMover.BoostSpeed(booster);
+    }
+
 }
